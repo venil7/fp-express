@@ -1,0 +1,9 @@
+{
+	"name": "@darkruby/app1",
+	"version": "1.0.0",
+	"main": "src/index.ts",
+	"type": "module",
+	"dependencies": {
+		"@darkruby/fp-express": "workspace:*"
+	}
+}
