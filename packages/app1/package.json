@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "type": "module",
+  "devDependencies": {
+    "@types/amqplib": "^0.10.5"
+  },
   "dependencies": {
     "@darkruby/fp-express": "workspace:*",
     "body-parser": "~1.20.2",
-    "express": "~4.18.3"
+    "express": "~4.18.3",
+    "amqplib": "~0.10.3",
+    "io-ts": "~2.2.21"
   }
 }
