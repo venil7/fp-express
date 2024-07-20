@@ -1,0 +1,22 @@
+meta {
+  name: list-orders
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://127.0.0.1:5050/api/orders
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "user_id": "95019290-fb6d-4b4f-aa4a-37cb7d8712ba",
+    "product": "coffee"
+  }
+}

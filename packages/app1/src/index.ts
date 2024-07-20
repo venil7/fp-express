@@ -2,10 +2,12 @@ import { createRequestHandler } from "@darkruby/fp-express";
 import * as amqplib from "amqplib";
 import bodyParser from "body-parser";
 import { Database } from "bun:sqlite";
+import type { RequestHandler } from "express";
 import { default as express } from "express";
+import * as TE from "fp-ts/TaskEither";
 import { pipe } from "fp-ts/lib/function";
-import { enqueueUser } from "./rabbit";
-import { createUser, getUserById } from "./services";
+import { createUser, getUserById } from "./services/database";
+import { enqueueUser } from "./services/rabbit";
 
 const db = (() => {
   const db = new Database();
@@ -19,6 +21,18 @@ const channel = await (async () => {
   const channel = await connection.createChannel();
   await channel.assertExchange("my_exchange", "direct", { durable: true });
   await channel.assertQueue("my_queue", { durable: true });
+  channel.consume("my_queue", async (payload) => {
+    if (payload) {
+      const user = JSON.parse(payload.content.toString("utf8"));
+      await pipe(
+        createUser({
+          params: [{ body: user }] as unknown as Parameters<RequestHandler>,
+          context: { db },
+        }),
+        TE.chain((_) => TE.fromIO(() => channel.ack(payload)))
+      )();
+    }
+  });
   return channel;
 })();
 

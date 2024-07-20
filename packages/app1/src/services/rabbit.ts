@@ -1,6 +1,6 @@
 import { fromTryCatch, type HandlerTask } from "@darkruby/fp-express";
 import * as amqplib from "amqplib";
-import type { User } from "./domain/user";
+import type { User } from "../domain/user";
 
 export type RabbitMqCtx = {
   channel: amqplib.Channel;

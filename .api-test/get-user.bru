@@ -1,0 +1,15 @@
+meta {
+  name: get-user
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://localhost:8099/api/user/777
+  body: none
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}

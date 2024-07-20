@@ -1,8 +1,9 @@
 {
-  "name": "@darkruby/server",
+  "name": "@darkruby/express-open-architecture",
   "module": "index.ts",
   "type": "module",
   "scripts": {
+    "start": "bun --watch packages/app1/src/index.ts",
     "check": "tsc --noEmit"
   },
   "devDependencies": {

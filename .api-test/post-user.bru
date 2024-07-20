@@ -1,0 +1,19 @@
+meta {
+  name: post-user
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8099/api/user
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {"name": "vasja", "id": 533}
+}

@@ -12,8 +12,20 @@ export type AppError = {
   error: string;
 };
 
-const stringifyUnknownError = (reason: unknown) =>
-  (reason as Error).message ?? JSON.stringify(reason) ?? "Unknown error";
+const stringifyUnknownError = (reason: unknown) => {
+  if (reason) {
+    if ((reason as Error).message) {
+      return (reason as Error).message;
+    }
+    return JSON.stringify(reason);
+  }
+  return "Unknown error";
+};
+
+export const notFound = <E = unknown>(reason: E) => ({
+  type: ErrorType.NotFound,
+  error: "Not Found",
+});
 
 export const generalError = <E = unknown>(reason: E) => ({
   type: ErrorType.General,
